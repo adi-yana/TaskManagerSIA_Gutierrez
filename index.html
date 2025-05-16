@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1> Task Manager</h1>
+      <p class="tagline">Stay on top of your tasks, and get things done!</p>
+      <button class="dark-mode-toggle" onclick="toggleDarkMode()"></button>
+    </div>
+
+    <!-- Instructions Section -->
+    <div class="instructions">
+      <p><strong>How to Use Task Manager</strong></p>
+      <p>Welcome to your Task Manager! Manage your tasks, set due dates, and mark them as done.</p>
+      <ul>
+        <li><strong>Add Tasks:</strong> Use the form to add a new task with a due date, priority, and category.</li>
+        <li><strong>Mark as Completed:</strong> Click the checkmark button to mark a task as done.</li>
+        <li><strong>Edit Tasks:</strong> Click the pencil icon to edit a task's details.</li>
+        <li><strong>Delete Tasks:</strong> Click the trash icon to remove a task.</li>
+        <li><strong>Filter:</strong> View all, completed, or pending tasks using the filter buttons.</li>
+        <li><strong>Search:</strong> Use the search bar to find tasks quickly.</li> 
+      </ul>
+    </div>
+
+    <!-- Form to Add Tasks -->
+    <div class="form">
+      <input type="text" id="taskInput" placeholder="Enter task..." />
+      <input type="date" id="dueDateInput" />
+      <select id="priorityInput">
+        <option value="High">High</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <input list="categorySuggestions" id="categoryInput" placeholder="Enter or choose category" />
+      <datalist id="categorySuggestions">
+        <option value="Work">
+        <option value="Personal">
+        <option value="Study">
+        <option value="Shopping">
+        <option value="Health">
+        <option value="Finance">
+        <option value="Others">
+      </datalist>
+      <button onclick="addTask()">Add</button>
+    </div>
+
+    <!-- Controls & Filters -->
+    <div class="controls">
+      <div class="filters">
+        <button class="filter active" onclick="filterTasks('All')">All</button>
+        <button class="filter" onclick="filterTasks('Completed')">Completed </button>
+        <button class="filter" onclick="filterTasks('Pending')">Pending </button>
+      </div>
+      <div class="task-count">
+        <span>Total: <strong id="totalTaskCount">0</strong></span> | 
+        <span>Completed: <strong id="completedTaskCount">0</strong></span> | 
+        <span>Pending: <strong id="pendingTaskCount">0</strong></span>
+      </div>
+      <input type="text" id="searchInput" placeholder="Search tasks..." oninput="renderTasks()"/>
+      <select id="sortInput" onchange="sortTasks()">
+        <option value="dueDateAsc">Sort by Due Date (Asc)</option>
+        <option value="dueDateDesc">Sort by Due Date (Desc)</option>
+      </select>
+    </div>
+
+    <!-- Task List -->
+    <ul id="taskList"></ul>
+  </div>
+
+  <footer>
+    <p>By Adriana Joy Gutierrez</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
