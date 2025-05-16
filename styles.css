@@ -1,0 +1,353 @@
+:root {
+  --bg: #fff;
+  --text: #333;
+  --card: #f9fbff;
+  --accent: #4e8cff;
+  --border: #ccc;
+  --shadow: rgba(0, 0, 0, 0.05);
+  --danger: crimson;
+  --overdue: #fff;
+}
+
+body.dark {
+  --bg: #1e1e2f;
+  --text: #f0f0f0;
+  --card: #2c2c3c;
+  --accent: #66aaff;
+  --border: #444;
+  --shadow: rgba(255, 255, 255, 0.05);
+  --danger: #ff5c5c;
+  --overdue: #402020;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: var(--bg);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px var(--shadow);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+.tagline {
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-top: 10px;
+  color: #777;
+}
+
+/* Dark Mode Toggle Button (Moon) */
+.dark-mode-toggle {
+  font-size: 1.4rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--accent);
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+/* Instructions Styling */
+.instructions {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  color: var(--text);
+  text-align: left;  /* Left align the content */
+  max-width: 700px;  /* Limit the width for better readability */
+  margin-left: auto;
+  margin-right: auto;  /* Centers the instructions container */
+}
+
+.instructions h2 {
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+}
+
+.instructions p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+.instructions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.instructions ul li {
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.instructions ul li strong {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.instructions ul li::before {
+  content: '•';
+  margin-right: 8px;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.instructions p:last-child {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 1rem;
+}
+
+.instructions {
+  margin-bottom: 3rem;
+}
+
+
+
+/* Form Styling */
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  justify-content: space-between;
+}
+
+.form input,
+.form select,
+.form button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  flex: 1;
+  min-width: 150px;
+  max-width: 250px;
+}
+
+.form input[type="date"],
+.form select {
+  max-width: 200px;
+}
+
+.form input[list="categorySuggestions"] {
+  flex: 2;
+  max-width: 300px;
+}
+
+.form button {
+  background-color: var(--accent);
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  flex: 0;
+  max-width: 120px;
+}
+
+.form button:hover {
+  background-color: #366fd0;
+}
+
+/* Controls and Filters */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#searchInput {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  flex: 1;
+  max-width: 300px;
+}
+
+.filters .filter {
+  margin: 5px;
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+body.dark .filters .filter {
+  background-color: #333;
+}
+
+.filters .filter.active,
+.filters .filter:hover {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* Task Styling */
+ul#taskList {
+  list-style: none;
+  padding: 0;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card);
+  border-left: 5px solid var(--accent);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.task:hover {
+  transform: scale(1.02);
+}
+
+.task.overdue {
+  background-color: #fff;
+}
+
+.task.completed .task-text {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.task small {
+  display: block;
+  color: #888;
+  margin-top: 5px;
+}
+
+.task-priority.High {
+  color: red;
+}
+
+.task-priority.Medium {
+  color: orange;
+}
+
+.task-priority.Low {
+  color: green;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.button-group button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #ec971f;
+}
+
+.complete-btn {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.complete-btn:hover {
+  background-color: #4cae4c;
+}
+
+.delete-btn {
+  background-color: var(--danger);
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
+
+.task-count {
+  font-size: 0.9rem; /* Smaller font size */
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: 10px;
+  display: flex;
+  gap: 10px; /* Reduce the gap between the items */
+  justify-content: center; /* Center-align the items */
+}
+
+.task-count span {
+  font-size: 0.9rem; /* Smaller font size for each item */
+  font-weight: 500;
+  color: var(--text);
+  text-align: center;
+}
+
+.task-count span strong {
+  color: var(--accent);
+}
+
+.task-count span span {
+  font-weight: 600;
+  font-size: 0.95rem; /* Slightly larger for the number */
+  color: var(--accent);
+}
+
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #999;
+}
