@@ -7,6 +7,7 @@ function addTask() {
   const dueDate = document.getElementById('dueDateInput').value;
   const priority = document.getElementById('priorityInput').value;
   const category = document.getElementById('categoryInput').value;
+  const description = document.getElementById('descriptionInput').value.trim();  // NEW
 
   if (!text || !dueDate) return;
 
@@ -16,6 +17,7 @@ function addTask() {
     dueDate,
     priority,
     category,
+    description, // NEW
     completed: false
   };
 
@@ -48,9 +50,15 @@ function editTask(id) {
   const newText = prompt("Edit task:", task.text);
   if (newText !== null && newText.trim() !== '') {
     task.text = newText.trim();
-    saveTasks();
-    renderTasks();
   }
+
+  const newDescription = prompt("Edit description:", task.description || "");
+  if (newDescription !== null) {
+    task.description = newDescription.trim();
+  }
+
+  saveTasks();
+  renderTasks();
 }
 
 // Function to filter tasks based on their status (All, Completed, Pending)
@@ -71,7 +79,7 @@ function renderTasks() {
   const searchInput = document.getElementById('searchInput').value.toLowerCase();
   const filteredTasks = tasks.filter(task => {
     const isCompleted = currentFilter === 'Completed' ? task.completed : currentFilter === 'Pending' ? !task.completed : true;
-    const isTextMatching = task.text.toLowerCase().includes(searchInput);
+    const isTextMatching = task.text.toLowerCase().includes(searchInput) || (task.description && task.description.toLowerCase().includes(searchInput)); // include description in search
     return isCompleted && isTextMatching;
   });
 
@@ -82,23 +90,18 @@ function renderTasks() {
     if (task.completed) taskItem.classList.add('completed');
     if (new Date(task.dueDate) < new Date() && !task.completed) taskItem.classList.add('overdue');
 
-    taskItem.innerHTML = `
-  <div class="task-info">
-    <span class="task-text">${task.text}</span>
-    <small>Due: ${task.dueDate} | ${task.category} | Priority: <span class="task-priority ${task.priority}">${task.priority}</span></small>
-  </div>
-  <div class="button-group">
-    <button class="complete-btn" onclick="toggleComplete(${task.id})" title="Mark as Completed">
-      <i class="fas fa-check"></i>
-    </button>
-    <button class="edit-btn" onclick="editTask(${task.id})" title="Edit Task">
-      <i class="fas fa-pencil-alt"></i>
-    </button>
-    <button class="delete-btn" onclick="deleteTask(${task.id})" title="Delete Task">
-      <i class="fas fa-trash"></i>
-    </button>
-  </div>
-`;
+    taskItem.innerHTML = 
+      `<div class="task-info">
+        <span class="task-text">${task.text}</span>
+        ${task.description ? `<small>Description: ${task.description}</small>` : ''}
+        <small>Due: ${task.dueDate} | ${task.category} | Priority: <span class="task-priority ${task.priority}">${task.priority}</span></small>
+      </div>
+      <div class="button-group">
+        <button class="complete-btn" onclick="toggleComplete(${task.id})">${task.completed ? 'Undo' : 'Complete'}</button>
+        <button class="edit-btn" onclick="editTask(${task.id})">Edit</button>
+        <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+      </div>`;
+
     taskList.appendChild(taskItem);
   });
 
@@ -116,6 +119,7 @@ function resetForm() {
   document.getElementById('dueDateInput').value = '';
   document.getElementById('priorityInput').value = 'Medium';
   document.getElementById('categoryInput').value = 'Work';
+  document.getElementById('descriptionInput').value = '';  // NEW
 }
 
 // Function to clear all completed tasks
