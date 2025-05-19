@@ -94,6 +94,7 @@ function renderTasks() {
   <div class="task-info">
     <span class="task-text">${task.text}</span>
     <small>Due: ${task.dueDate} | ${task.category} | Priority: <span class="task-priority ${task.priority}">${task.priority}</span></small>
+    ${task.description ? `<p class="task-description">${task.description}</p>` : ''}
   </div>
   <div class="button-group">
     <button class="complete-btn" onclick="toggleComplete(${task.id})" title="Mark as Completed">

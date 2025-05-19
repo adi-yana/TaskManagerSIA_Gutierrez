@@ -351,3 +351,8 @@ footer {
   font-size: 0.9rem;
   color: #999;
 }
+.task-description {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #555;
+}
