@@ -90,17 +90,24 @@ function renderTasks() {
     if (task.completed) taskItem.classList.add('completed');
     if (new Date(task.dueDate) < new Date() && !task.completed) taskItem.classList.add('overdue');
 
-    taskItem.innerHTML = 
-      `<div class="task-info">
-        <span class="task-text">${task.text}</span>
-        ${task.description ? `<small>Description: ${task.description}</small>` : ''}
-        <small>Due: ${task.dueDate} | ${task.category} | Priority: <span class="task-priority ${task.priority}">${task.priority}</span></small>
-      </div>
-      <div class="button-group">
-        <button class="complete-btn" onclick="toggleComplete(${task.id})">${task.completed ? 'Undo' : 'Complete'}</button>
-        <button class="edit-btn" onclick="editTask(${task.id})">Edit</button>
-        <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
-      </div>`;
+  taskItem.innerHTML = `
+  <div class="task-info">
+    <span class="task-text">${task.text}</span>
+    <small>Due: ${task.dueDate} | ${task.category} | Priority: <span class="task-priority ${task.priority}">${task.priority}</span></small>
+  </div>
+  <div class="button-group">
+    <button class="complete-btn" onclick="toggleComplete(${task.id})" title="Mark as Completed">
+      <i class="fas fa-check"></i>
+    </button>
+    <button class="edit-btn" onclick="editTask(${task.id})" title="Edit Task">
+      <i class="fas fa-pencil-alt"></i>
+    </button>
+    <button class="delete-btn" onclick="deleteTask(${task.id})" title="Delete Task">
+      <i class="fas fa-trash"></i>
+    </button>
+  </div>
+`;
+
 
     taskList.appendChild(taskItem);
   });
